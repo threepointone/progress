@@ -1,0 +1,20 @@
+{
+  "name": "progress",
+  "version": "0.0.1",
+  "description": "progress bar",
+  "keywords": [],
+  "author": "Sunil Pai <threepointone@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/threepointone/progress.git"
+  },
+  "dependencies": {
+    "fn": "git://github.com/threepointone/fn",
+    "morpheus": "~0.6.8"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "main": "index"
+}

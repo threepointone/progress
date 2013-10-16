@@ -1,0 +1,15 @@
+html, body{
+	display: block;
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.progress-bar{
+	display: block;
+	position: absolute;
+	top:0;
+	height:10px;
+	background-color: #8cc63f;
+	width: 0%;
+}

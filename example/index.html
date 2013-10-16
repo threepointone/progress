@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		
+		<script src='../dist/progress.js'></script>
+		<script>
+			var progress = require('./index.js');
+			var bar = progress();
+			var ctr = 0;
+			var intval = setInterval(function(){
+				if(ctr === 3){
+					bar.end();
+					clearInterval(intval);
+				}
+				else{
+					bar.inc();
+					ctr++;
+				}
+			}, 700);
+		</script>
+		
+	</body>
+</html>
