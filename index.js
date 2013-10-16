@@ -63,7 +63,8 @@ function widen(el, amt, done) {
 
 	animate(el, {
 		width: amt + '%',
-		opacity: 1
+		opacity: 1,
+		complete: done
 	});
 }
 
@@ -93,9 +94,7 @@ function progress(el, config) {
 	this.parent = el || document.body;
 	this.el = document.createElement('div');
 	this.el.className = 'progress-bar';
-	this.current = 0;
 	this.parent.appendChild(this.el);
-
 }
 
 _.extend(progress.prototype, {
@@ -108,6 +107,7 @@ _.extend(progress.prototype, {
 
 	},
 	end: function(done) {
+		// finish the animation
 		var t = this;
 		this.finished = true;
 		animate(this.el, {

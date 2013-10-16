@@ -55,8 +55,6 @@ function wood(el, done) {
 
 function widen(el, amt, done) {
 	// assumption is the el will have width set in %. this is key. 
-
-
 	if (typeof done === 'boolean' && done) {
 		// no animation
 		el.style.width = amt + '%';
@@ -66,7 +64,8 @@ function widen(el, amt, done) {
 
 	animate(el, {
 		width: amt + '%',
-		opacity: 1
+		opacity: 1,
+		complete: done
 	});
 }
 
@@ -87,52 +86,43 @@ function without(arr, el) {
 	});
 }
 
-var instances = [];
-
 
 function progress(el, config) {
-	if(!(this instanceof progress)){
+	if (!(this instanceof progress)) {
 		return new progress(el, config);
 	}
 	this.current = 0;
 	this.parent = el || document.body;
 	this.el = document.createElement('div');
 	this.el.className = 'progress-bar';
-	this.current = 0;
 	this.parent.appendChild(this.el);
-
 }
 
 _.extend(progress.prototype, {
 	inc: function() {
+		// increment randomly part of the way, never reaching finish
 		if (!this.finished) {
-			var to = this.current = this.current + Math.random()*0.6*(100 - this.current);
+			var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
 			widen(this.el, to);
 		}
-		// increment randomly part of the way, never reaching finish
+
 	},
 	end: function(done) {
+		// finish the animation
 		var t = this;
 		this.finished = true;
 		animate(this.el, {
 			width: '100%',
 			opacity: 0,
-			complete: function(){
+			complete: function() {
 				t.parent.removeChild(t.el);
 				done && done();
 			}
 		});
-		instances = without(instances, this)
 	}
 
 });
 
-progress.clear = function() {
-	// remove all existing progress bars
-	_.each(instances, function(bar){
-		bar.end();
-	});
-}
 
 module.exports = progress;
 },{"fn":3,"morpheus":4}],"./index.js":[function(require,module,exports){
