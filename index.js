@@ -1,48 +1,6 @@
-var morpheus = require('morpheus'),
-    _ = require('fn');
+var _ = require('fn');
+var duration = 1000;
 
-
-function duration() {
-    // return a arandom time period between 0.5 - 0.8
-    return 500 + (Math.random() * 300);
-}
-
-function easing(t) {
-    // return (-Math.cos(pos * Math.PI) / 2) + 0.5;
-    return Math.sin(t * Math.PI / 2);
-}
-
-function defaults() {
-    return {
-        easing: easing,
-        duration: duration()
-    };
-}
-
-function animate(el, options) {
-    var opts = _.extend({}, options);
-    if (el.animation) {
-        el.animation.stop(opts.stop);
-        delete opts.stop;
-    }
-    el.animation = morpheus(el, _.extend(defaults(), opts));
-}
-
-function widen(el, amt, done) {
-    // assumption is the el will have width set in %. this is key. 
-    if (typeof done === 'boolean' && done) {
-        // no animation
-        el.style.width = amt + '%';
-        el.style.opacity = 1;
-        return el;
-    }
-
-    animate(el, {
-        width: amt + '%',
-        opacity: 1,
-        complete: done
-    });
-}
 
 function progress(el, config) {
     if (!(this instanceof progress)) {
@@ -53,10 +11,7 @@ function progress(el, config) {
     this.el = document.createElement('div');
     this.el.className = 'progress-bar';
     this.parent.appendChild(this.el);
-    
-    animate(this.el, {
-        opacity: 1
-    });
+    this.el.style.opacity = 1;
 }
 
 _.extend(progress.prototype, {
@@ -64,22 +19,20 @@ _.extend(progress.prototype, {
         // increment randomly part of the way, never reaching finish
         if (!this.finished) {
             var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
-            widen(this.el, to);
+            el.style.width = to + '%';
+            el.style.opacity = 1;
         }
 
     },
-    end: function(done) {
+    end: function() {
         // finish the animation
         var t = this;
         this.finished = true;
-        animate(this.el, {
-            width: '100%',
-            opacity: 0,
-            complete: function() {
-                t.parent.removeChild(t.el);
-                done && done();
-            }
-        });
+        this.el.style.width = '100%';
+        this.el.style.opacity = 0;
+        setTimeout(function() {
+            t.parent.removeChild(t.el);            
+        }, duration);
     }
 
 });

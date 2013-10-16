@@ -13,4 +13,8 @@ html, body{
 	background-color: #8cc63f;
 	width: 0%;
 	opacity: 0;
+	-moz-transition: width 1s, opacity 1s;
+    -webkit-transition: width 1s, opacity 1s;
+    -o-transition: width 1s, opacity 1s;
+    transition: width 1s, opacity 1s;
 }
