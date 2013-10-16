@@ -28,30 +28,6 @@ function animate(el, options) {
     el.animation = morpheus(el, _.extend(defaults(), opts));
 }
 
-function glass(el, done) {
-    if (typeof done === 'boolean' && done) {
-        // no animation
-        el.style.opacity = 0;
-        return el;
-    }
-    animate(el, {
-        opacity: 0,
-        complete: done
-    });
-}
-
-function wood(el, done) {
-    if (typeof done === 'boolean' && done) {
-        // no animation
-        el.style.opacity = 1;
-        return el;
-    }
-    animate(el, {
-        opacity: 1,
-        complete: done
-    });
-}
-
 function widen(el, amt, done) {
     // assumption is the el will have width set in %. this is key. 
     if (typeof done === 'boolean' && done) {
@@ -68,24 +44,6 @@ function widen(el, amt, done) {
     });
 }
 
-function show(el) {
-    el.style.display = el.__display || '';
-    return el;
-}
-
-function hide(el) {
-    el.__display = el.style.display !== 'none' ? el.style.display : '';
-    el.style.display = 'none';
-    return el;
-}
-
-function without(arr, el) {
-    return _.filter(arr, function(datum) {
-        return datum !== el;
-    });
-}
-
-
 function progress(el, config) {
     if (!(this instanceof progress)) {
         return new progress(el, config);
@@ -95,6 +53,10 @@ function progress(el, config) {
     this.el = document.createElement('div');
     this.el.className = 'progress-bar';
     this.parent.appendChild(this.el);
+    
+    animate(this.el, {
+        opacity: 1
+    });
 }
 
 _.extend(progress.prototype, {

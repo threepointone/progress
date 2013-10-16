@@ -1,125 +1,87 @@
 require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"Ca9gtD":[function(require,module,exports){
 var morpheus = require('morpheus'),
-	_ = require('fn');
+    _ = require('fn');
 
 
 function duration() {
-	// return a arandom time period between 0.5 - 0.8
-	return 500 + (Math.random() * 300);
+    // return a arandom time period between 0.5 - 0.8
+    return 500 + (Math.random() * 300);
 }
 
 function easing(t) {
-	// return (-Math.cos(pos * Math.PI) / 2) + 0.5;
-	return Math.sin(t * Math.PI / 2);
+    // return (-Math.cos(pos * Math.PI) / 2) + 0.5;
+    return Math.sin(t * Math.PI / 2);
 }
 
 function defaults() {
-	return {
-		easing: easing,
-		duration: duration()
-	};
+    return {
+        easing: easing,
+        duration: duration()
+    };
 }
 
 function animate(el, options) {
-	var opts = _.extend({}, options);
-	if (el.animation) {
-		el.animation.stop(opts.stop);
-		delete opts.stop;
-	}
-	el.animation = morpheus(el, _.extend(defaults(), opts));
-}
-
-function glass(el, done) {
-	if (typeof done === 'boolean' && done) {
-		// no animation
-		el.style.opacity = 0;
-		return el;
-	}
-	animate(el, {
-		opacity: 0,
-		complete: done
-	});
-}
-
-function wood(el, done) {
-	if (typeof done === 'boolean' && done) {
-		// no animation
-		el.style.opacity = 1;
-		return el;
-	}
-	animate(el, {
-		opacity: 1,
-		complete: done
-	});
+    var opts = _.extend({}, options);
+    if (el.animation) {
+        el.animation.stop(opts.stop);
+        delete opts.stop;
+    }
+    el.animation = morpheus(el, _.extend(defaults(), opts));
 }
 
 function widen(el, amt, done) {
-	// assumption is the el will have width set in %. this is key. 
-	if (typeof done === 'boolean' && done) {
-		// no animation
-		el.style.width = amt + '%';
-		el.style.opacity = 1;
-		return el;
-	}
+    // assumption is the el will have width set in %. this is key. 
+    if (typeof done === 'boolean' && done) {
+        // no animation
+        el.style.width = amt + '%';
+        el.style.opacity = 1;
+        return el;
+    }
 
-	animate(el, {
-		width: amt + '%',
-		opacity: 1,
-		complete: done
-	});
+    animate(el, {
+        width: amt + '%',
+        opacity: 1,
+        complete: done
+    });
 }
-
-function show(el) {
-	el.style.display = el.__display || '';
-	return el;
-}
-
-function hide(el) {
-	el.__display = el.style.display !== 'none' ? el.style.display : '';
-	el.style.display = 'none';
-	return el;
-}
-
-function without(arr, el) {
-	return _.filter(arr, function(datum) {
-		return datum !== el;
-	});
-}
-
 
 function progress(el, config) {
-	if (!(this instanceof progress)) {
-		return new progress(el, config);
-	}
-	this.current = 0;
-	this.parent = el || document.body;
-	this.el = document.createElement('div');
-	this.el.className = 'progress-bar';
-	this.parent.appendChild(this.el);
+    if (!(this instanceof progress)) {
+        return new progress(el, config);
+    }
+    this.current = 0;
+    this.parent = el || document.body;
+    this.el = document.createElement('div');
+    this.el.className = 'progress-bar';
+    this.parent.appendChild(this.el);
+    
+    animate(this.el, {
+        opacity: 1
+    });
 }
 
 _.extend(progress.prototype, {
-	inc: function() {
-		// increment randomly part of the way, never reaching finish
-		if (!this.finished) {
-			var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
-			widen(this.el, to);
-		}
+    inc: function() {
+        // increment randomly part of the way, never reaching finish
+        if (!this.finished) {
+            var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
+            widen(this.el, to);
+        }
 
-	},
-	end: function(done) {
-		// finish the animation
-		var t = this;
-		this.finished = true;
-		animate(this.el, {
-			width: '100%',
-			opacity: 0,
-			complete: function() {
-				t.parent.removeChild(t.el);
-				done && done();
-			}
-		});
-	}
+    },
+    end: function(done) {
+        // finish the animation
+        var t = this;
+        this.finished = true;
+        animate(this.el, {
+            width: '100%',
+            opacity: 0,
+            complete: function() {
+                t.parent.removeChild(t.el);
+                done && done();
+            }
+        });
+    }
 
 });
 
