@@ -1,19 +1,19 @@
 html, body{
-	display: block;
-	position: relative;
-	margin: 0;
-	padding: 0;
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 .progress-bar{
-	display: block;
-	position: absolute;
-	top:0;
-	height:10px;
-	background-color: #8cc63f;
-	width: 0%;
-	opacity: 0;
-	-moz-transition: width 1s, opacity 1s;
+    display: block;
+    position: absolute;
+    top:0;
+    height:10px;
+    background-color: #8cc63f;
+    width: 0%;
+    opacity: 0;
+    -moz-transition: width 1s, opacity 1s;
     -webkit-transition: width 1s, opacity 1s;
     -o-transition: width 1s, opacity 1s;
     transition: width 1s, opacity 1s;

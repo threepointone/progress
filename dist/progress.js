@@ -11,7 +11,7 @@ function progress(el, config) {
     this.el = document.createElement('div');
     this.el.className = 'progress-bar';
     this.parent.appendChild(this.el);
-    this.el.style.opacity = 1;
+    this.el.style.opacity = 1;    
 }
 
 _.extend(progress.prototype, {

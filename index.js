@@ -29,7 +29,7 @@ _.extend(progress.prototype, {
         this.el.style.width = '100%';
         this.el.style.opacity = 0;
         setTimeout(function() {
-            t.parent.removeChild(t.el);            
+            t.parent.removeChild(t.el);
         }, duration);
     }
 });
