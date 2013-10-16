@@ -1,5 +1,4 @@
-var _ = require('fn'),
-    duration = 1000;
+var duration = 1000;
 
 function progress(el, config) {
     if (!(this instanceof progress)) {
@@ -13,25 +12,25 @@ function progress(el, config) {
     this.el.style.opacity = 1;
 }
 
-_.extend(progress.prototype, {
-    inc: function() {
+progress.prototype.inc = function() {
         // increment randomly part of the way, never reaching finish
         if (!this.finished) {
             var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
             this.el.style.width = to + '%';
             this.el.style.opacity = 1;
         }
-    },
-    end: function() {
-        // finish the animation
+    };
+progress.prototype.end = function(){
+            // finish the animation
         var t = this;
         this.finished = true;
         this.el.style.width = '100%';
         this.el.style.opacity = 0;
         setTimeout(function() {
             t.parent.removeChild(t.el);
-        }, duration);
-    }
-});
+        }, duration);    
+}    
+
+
 
 module.exports = progress;

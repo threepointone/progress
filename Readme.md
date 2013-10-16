@@ -4,13 +4,11 @@
   progress bar
 
 ## api
-use browserify to use this module. once compiled - 
+
 ```js
-	var progress = require('progress');
+	var bar = ProgressBar();   // create a new bar
 
-	var bar = progress();   // create a new bar
-
-	bar.inc();  // increments the width of the bar randomly (but never reaches the very end)
+	bar.inc();  // increments the width of the bar (but never reaches the very end)
 
 	bar.end();  // reaches the end, and fades out
 ```

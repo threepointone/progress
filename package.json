@@ -8,9 +8,7 @@
     "type": "git",
     "url": "git://github.com/threepointone/progress.git"
   },
-  "dependencies": {
-    "fn": "git://github.com/threepointone/fn"
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "*",
     "should": "*"
