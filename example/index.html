@@ -1,26 +1,27 @@
 <!doctype html>
 <html>
-	<head>
-		<link rel="stylesheet" href="style.css">
-	</head>
-	<body>
-		
-		<script src='../dist/progress.js'></script>
-		<script>
-			var progress = require('./index.js');
-			var bar = progress();
-			var ctr = 0;
-			var intval = setInterval(function(){
-				if(ctr === 3){
-					bar.end();
-					clearInterval(intval);
-				}
-				else{
-					bar.inc();
-					ctr++;
-				}
-			}, 700);
-		</script>
-		
-	</body>
+    <head>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        
+        <script src='../dist/progress.js'></script>
+        <script>
+            var progress = require('./index.js');
+            var bar = progress();
+            // run a loop four times. the first 3 times, do a .inc(), and call .end() for the last round
+
+            var ctr = 0;
+            var intval = setInterval(function() {
+                if (ctr < 3) {
+                    bar.inc();
+                    ctr++;
+                } else {
+                    bar.end();
+                    clearInterval(intval);                    
+                }
+            }, 700);
+        </script>
+        
+    </body>
 </html>

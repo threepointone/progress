@@ -8,9 +8,9 @@ html, body{
 .progress-bar{
     display: block;
     position: absolute;
-    top:0;
-    height:10px;
-    background-color: #8cc63f;
+    top: 0;
+    height: 5px;
+    background-color: #3F8AF1;
     width: 0%;
     opacity: 0;
     -moz-transition: width 1s, opacity 1s;

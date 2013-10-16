@@ -34,5 +34,4 @@ _.extend(progress.prototype, {
     }
 });
 
-
 module.exports = progress;
