@@ -1,6 +1,5 @@
-var _ = require('fn');
-var duration = 1000;
-
+var _ = require('fn'),
+    duration = 1000;
 
 function progress(el, config) {
     if (!(this instanceof progress)) {
@@ -22,7 +21,6 @@ _.extend(progress.prototype, {
             this.el.style.width = to + '%';
             this.el.style.opacity = 1;
         }
-
     },
     end: function() {
         // finish the animation
@@ -34,7 +32,6 @@ _.extend(progress.prototype, {
             t.parent.removeChild(t.el);            
         }, duration);
     }
-
 });
 
 
