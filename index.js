@@ -19,8 +19,8 @@ _.extend(progress.prototype, {
         // increment randomly part of the way, never reaching finish
         if (!this.finished) {
             var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
-            el.style.width = to + '%';
-            el.style.opacity = 1;
+            this.el.style.width = to + '%';
+            this.el.style.opacity = 1;
         }
 
     },
