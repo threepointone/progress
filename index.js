@@ -1,3 +1,4 @@
+"use strict";
 var duration = 1000;
 
 function progress(el, config) {
@@ -16,20 +17,31 @@ progress.prototype.inc = function() {
     // increment randomly part of the way, never reaching finish
     if (!this.finished) {
         var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
-        this.el.style.width = to + '%';
-        this.el.style.opacity = 1;
+        
+        var t = this;
+        setTimeout(function() {
+            t.el.style.width = to + '%';
+            t.el.style.opacity = 1;
+        }, 0);
+
     }
 };
 
 progress.prototype.end = function() {
     // finish the animation
     var t = this;
-    this.finished = true;
-    this.el.style.width = '100%';
-    this.el.style.opacity = 0;
-    setTimeout(function() {
-        t.parent.removeChild(t.el);
-    }, duration);
+    if (!this.finished) {
+        this.finished = true;
+        setTimeout(function() {
+            t.el.style.width = '100%';
+            t.el.style.opacity = 0;
+            setTimeout(function() {
+                t.parent.removeChild(t.el);
+            }, duration); // duration of the transition    
+        }, 0);
+
+    }
+
 };
 
 module.exports = progress;
