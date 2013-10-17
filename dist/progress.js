@@ -19,9 +19,10 @@ progress.prototype.inc = function() {
     // increment randomly part of the way, never reaching finish
     if (!this.finished) {
         var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
-        this.el.style.width = to + '%';
+        
         var t = this;
         setTimeout(function() {
+            t.el.style.width = to + '%';
             t.el.style.opacity = 1;
         }, 0);
 
