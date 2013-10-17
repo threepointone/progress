@@ -3,6 +3,10 @@
 
   progress bar
 
+## usage
+	
+  see `example/index.html` for usage
+
 ## api
 
 ```js
