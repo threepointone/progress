@@ -2,33 +2,29 @@
 <html>
     <head>
         <style>
-            html, body{
-                display: block;
-                position: relative;
-                margin: 0;
-                padding: 0;
-            }
+            html, body{ display: block; position: relative; margin: 0; padding: 0; height: 100%; width:100%; }
         </style>
         <link rel="stylesheet" href="../style.css">
     </head>
-    <body>
+    <body onclick="run()">
         
         <script src='../dist/progress.js'></script>
         <script>
-            var bar = ProgressBar();
-            // run a loop four times. the first 3 times, do a .inc(), and call .end() for the last round
-
-            var ctr = 0;
-            var intval = setInterval(function() {
-                if (ctr < 3) {
-                    bar.inc();
-                    ctr++;
-                } else {
-                    bar.end();
-                    clearInterval(intval);                    
-                }
-            }, 700);
-        </script>
-        
+            function run(){
+                var bar = ProgressBar();
+                // run a loop four times. the first 3 times, do a .inc(), and call .end() for the last round
+                setTimeout(function(){ bar.inc(); }, 0);
+                var ctr = 0;
+                var intval = setInterval(function() {
+                    if (ctr < 2) {
+                        bar.inc();
+                        ctr++;
+                    } else {
+                        bar.end();
+                        clearInterval(intval);                    
+                    }
+                }, 700);    
+            }            
+        </script>        
     </body>
 </html>

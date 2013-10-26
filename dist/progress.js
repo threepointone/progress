@@ -15,24 +15,23 @@ function progress(el, config) {
     this.el.style.opacity = 1;
 }
 
-progress.prototype.inc = function() {
+progress.prototype.inc = function(to) {
     // increment randomly part of the way, never reaching finish
     if (!this.finished) {
-        var to = this.current = this.current + Math.random() * 0.6 * (100 - this.current);
-        
         var t = this;
+        to = this.current = (typeof to === 'number') ? Math.min(to, 100) : (this.current + Math.random() * 0.6 * (100 - this.current));
         setTimeout(function() {
             t.el.style.width = to + '%';
             t.el.style.opacity = 1;
         }, 0);
-
     }
 };
 
 progress.prototype.end = function() {
     // finish the animation
-    var t = this;
+
     if (!this.finished) {
+        var t = this;
         this.finished = true;
         setTimeout(function() {
             t.el.style.width = '100%';
@@ -41,9 +40,7 @@ progress.prototype.end = function() {
                 t.parent.removeChild(t.el);
             }, duration); // duration of the transition    
         }, 0);
-
     }
-
 };
 
 module.exports = progress;
