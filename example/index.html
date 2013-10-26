@@ -13,7 +13,8 @@
             function run(){
                 var bar = ProgressBar();
                 // run a loop four times. the first 3 times, do a .inc(), and call .end() for the last round
-                setTimeout(function(){ bar.inc(); }, 0);
+                bar.inc(); 
+                
                 var ctr = 0;
                 var intval = setInterval(function() {
                     if (ctr < 2) {

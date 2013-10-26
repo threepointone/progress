@@ -27,7 +27,6 @@ progress.prototype.inc = function(to) {
 
 progress.prototype.end = function() {
     // finish the animation
-
     if (!this.finished) {
         var t = this;
         this.finished = true;
