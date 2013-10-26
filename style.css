@@ -4,7 +4,7 @@
     position: fixed;
     top: 0;
     height: 5px;
-    background-color: #3F8AF1;
+    background-color: #3F8AF1;    
     width: 0%;
     opacity: 0;
     -moz-transition: width 1s, opacity 1s;
